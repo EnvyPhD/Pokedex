@@ -11,18 +11,38 @@ constructor() {
   super();
 
   this.state = {
-    friends: [],
-    searchfield: ''
+    pokemonArray: [],
+    pokemonInfoArray: [],
+    searchfield: '',
   }
 
   // this.handleChange = this.handleChange.bind(this);
 }
 
+
 componentDidMount() {
-  fetch('https://jsonplaceholder.typicode.com/users')
+  fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
     .then(response => response.json())
-    .then(users => this.setState({ friends: users}))
+    .then(data => this.setState({ pokemonArray: data.results}))
+    .then(this.fetchSinglePokemon)
 }
+
+fetchSinglePokemon = () => {
+  for(let i = 0; i < this.state.pokemonArray.length;i++){
+    let url = this.state.pokemonArray[i].url;
+    console.log(url)
+      fetch(url)
+      .then(response => response.json())
+      .then(pokedata => this.setState({pokemonInfoArray: pokedata}))
+      // .then(pokedata => {
+      //   for (let i = 0; i < this.state.pokemonArray.size; i++) {
+      //     this.setState({pokemonInfoArray: pokedata})
+      //     console.log("lol")
+      //   }
+      // })
+  }
+}
+
 handleChange = e => {
   this.setState(
       ({ searchfield: e.target.value })
@@ -31,9 +51,12 @@ handleChange = e => {
 
 
   render() {
-    const { friends, searchfield } = this.state;
-    const filteredFriends = friends.filter(friend =>
-      friend.name.toLowerCase().includes(searchfield.toLowerCase())
+    const { pokemonArray, searchfield} = this.state;
+    console.log(this.state.pokemonArray)
+    console.log(this.state.pokemonInfoArray)
+
+    const filteredPokemon = pokemonArray.filter(pokemon =>
+      pokemon.name.includes(searchfield.toLowerCase())
     )
 
     return ( 
@@ -45,7 +68,7 @@ handleChange = e => {
           placeholder="Search Friends"
           handleChange={this.handleChange}
         />
-        <CardList friends={filteredFriends} />
+        <CardList friends={filteredPokemon} />
       </div>
     )
   }
