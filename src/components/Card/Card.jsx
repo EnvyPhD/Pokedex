@@ -8,6 +8,6 @@ export const Card = props => (
             } */}
         <img alt="friend" src ={`https://robohash.org/${props.pokemon.id}?set=set2&size=180x180`}></img>
         <h2> {props.pokemon.name} </h2>
-        <p> {props.pokemon.type}</p>
+        <p> {props.pokemon.types}</p>
     </div>
 )
