@@ -3,10 +3,10 @@ import { Card } from '../Card/Card'
 import './CardList.css'
 
 export const CardList = props => (
+    
     <div className='CardList'>
-        {props.friends.map(person => (
-            <Card key={person.id} person={person} />
-
+        {props.friends.map(pokemon => (
+            <Card key={pokemon.id} pokemon={pokemon} />
         ))}
     </div>
 )
