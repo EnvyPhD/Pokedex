@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { CardList } from './components/CardList/CardList'
-
 import SearchBox from './components/SearchBox/SearchBox.jsx'
 import './App.css';
-
-
 
 class App extends Component {
 constructor() {
@@ -52,14 +49,10 @@ fetchSinglePokemon = () => {
      fetch(url)
       .then(response => response.json())
       .then(pokedata => {
-        //tempInfo.push(pokedata)
         return pokedata
-        // modified to resolve Promise with tempInfo as value
       })
     )
   }
-  
-  //for(const info of await fetchArray)
   Promise.all(fetchArray).then(infoArray => {console.log(infoArray)
     this.setState({
       pokemonInfoArray: infoArray
@@ -75,28 +68,22 @@ handleChange = e => {
 
   render() {
     const {searchfield, pokemonInfoArray} = this.state;
-
     const filteredPokemon = pokemonInfoArray.filter(pokemon =>
       pokemon.name.includes(searchfield.toLowerCase()))
-
 
     return ( 
       <div className="App">
         <h1>
           SuperDex
         </h1>
-      
         <SearchBox 
           placeholder="Find a Pokè"
           handleChange={this.handleChange}
         />
-
         <CardList names={filteredPokemon}  />
       </div>
     )
   }
 }
-
-
 
 export default App;
