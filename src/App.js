@@ -15,32 +15,33 @@ constructor() {
     pokemonInfoArray: [],
     searchfield: '',
   }
-
-  // this.handleChange = this.handleChange.bind(this);
 }
 
 
 componentDidMount() {
-  fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
+  this.fetchKantoDex()
+  // console.log(this.state.pokemonArray)
+  // console.log(this.state.pokemonInfoArray)
+}
+// Fetches the pokemon that reside in Kanto.
+fetchKantoDex = () => {
+  fetch('https://pokeapi.co/api/v2/pokemon?limit=10')
     .then(response => response.json())
     .then(data => this.setState({ pokemonArray: data.results}))
     .then(this.fetchSinglePokemon)
 }
 
+// Is called by other fetch methods. Loops through and fetches the information pertaining to
+// each pokeon fetched, and stores their info in a seperate array.
 fetchSinglePokemon = () => {
+  let tempInfo = [];
   for(let i = 0; i < this.state.pokemonArray.length;i++){
     let url = this.state.pokemonArray[i].url;
-    console.log(url)
       fetch(url)
       .then(response => response.json())
-      .then(pokedata => this.setState({pokemonInfoArray: pokedata}))
-      // .then(pokedata => {
-      //   for (let i = 0; i < this.state.pokemonArray.size; i++) {
-      //     this.setState({pokemonInfoArray: pokedata})
-      //     console.log("lol")
-      //   }
-      // })
-  }
+      .then(pokedata => tempInfo.push(pokedata))
+  } 
+  this.setState({ pokemonInfoArray: tempInfo})
 }
 
 handleChange = e => {
@@ -52,9 +53,6 @@ handleChange = e => {
 
   render() {
     const { pokemonArray, searchfield} = this.state;
-    console.log(this.state.pokemonArray)
-    console.log(this.state.pokemonInfoArray)
-
     const filteredPokemon = pokemonArray.filter(pokemon =>
       pokemon.name.includes(searchfield.toLowerCase())
     )
