@@ -8,8 +8,7 @@ function capitalizeFirstLetter (string) {
 export const Card = props => (
     // console.log(props),
     <div className="Cards">
-
-        <img alt="friend" src ={`https://robohash.org/${props.pokemon.id}?set=set2&size=180x180`}></img>
+        <img alt="friend" src={props.pokemon.sprites.front_default}></img>
         <h2> 
             {capitalizeFirstLetter(props.pokemon.name)} 
         </h2>
