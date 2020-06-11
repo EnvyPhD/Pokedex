@@ -10,9 +10,17 @@
     backface-visibility: hidden;
     transform: translateZ(0);
     transition: transform 0.25s ease-out;
+    
   }
   
   .Cards:hover {
     transform: scale(1.05);
   }
-  
+  img {
+    margin: 0 auto;
+    height: 140px;
+    margin-bottom: 0;
+  }
+  h2 {
+    margin-top: 0;
+  }

@@ -19,7 +19,7 @@ componentDidMount() {
 }
 // Fetches the pokemon that reside in Kanto.
 fetchKantoDex = () => {
-  fetch('https://pokeapi.co/api/v2/pokemon?limit=10')
+  fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
     .then(response => response.json())
     .then(data => this.setState({ pokemonArray: data.results}))
     .then(this.fetchSinglePokemon)
@@ -80,10 +80,10 @@ handleChange = e => {
           placeholder="Find a Pokè"
           handleChange={this.handleChange}
         />
-        <CardList names={filteredPokemon}  />
+        <CardList pokeInfo={filteredPokemon}  />
       </div>
     )
   }
 }
 
-export default App;
+export default App; 

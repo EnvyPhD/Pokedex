@@ -7,7 +7,7 @@ import './CardList.css'
 export const CardList = props => (
     console.log(props),
     <div className='CardList'>
-        {props.names.map(pokemon => (
+        {props.pokeInfo.map(pokemon => (
             <Card key={pokemon.id} pokemon={pokemon}  />
         ))}
     </div>

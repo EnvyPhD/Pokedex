@@ -8,11 +8,10 @@ function capitalizeFirstLetter (string) {
 export const Card = props => (
     // console.log(props),
     <div className="Cards">
-        <img alt="friend" src={props.pokemon.sprites.front_default}></img>
         <h2> 
             {capitalizeFirstLetter(props.pokemon.name)} 
         </h2>
+        <img alt="friend" src={props.pokemon.sprites.front_default}></img>
         <p>Type: {props.pokemon.types[0].type.name} </p>
-
     </div>
 )   
